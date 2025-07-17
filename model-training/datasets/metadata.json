@@ -1,0 +1,7 @@
+[
+  {
+    "input": "datasets/raw/track1.wav",
+    "output": "datasets/processed/track1.wav",
+    "caption": "A funky jazz groove."
+  }
+]

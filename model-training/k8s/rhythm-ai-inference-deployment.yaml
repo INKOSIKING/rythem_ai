@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rhythm-ai-inference
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rhythm-ai-inference
+  template:
+    metadata:
+      labels:
+        app: rhythm-ai-inference
+    spec:
+      containers:
+      - name: api
+        image: ghcr.io/yourorg/rhythm-ai-inference:latest
+        ports:
+        - containerPort: 9000
+        env:
+        - name: MODEL_PATH
+          value: "/app/models/checkpoints/melodygen.quant.onnx"
+        resources:
+          limits:
+            cpu: "2"
+            memory: "8Gi"
+      volumes:
+      - name: model-volume
+        persistentVolumeClaim:
+          claimName: rhythm-ai-model-pvc
+      volumeMounts:
+      - name: model-volume
+        mountPath: /app/models/checkpoints

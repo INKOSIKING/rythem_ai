@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: music-ai-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: music-ai-backend
+  template:
+    metadata:
+      labels:
+        app: music-ai-backend
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/rythemai/music-ai-backend:latest
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: openai-api
+                  key: key

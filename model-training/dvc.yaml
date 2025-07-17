@@ -1,0 +1,25 @@
+stages:
+  preprocess:
+    cmd: python preprocess.py
+    deps:
+      - preprocess.py
+      - datasets/raw
+    outs:
+      - datasets/processed
+
+  train:
+    cmd: python train.py
+    deps:
+      - train.py
+      - datasets/processed
+      - config.yaml
+    outs:
+      - models/checkpoints
+
+  evaluate:
+    cmd: python evaluate.py
+    deps:
+      - evaluate.py
+      - models/checkpoints
+    outs:
+      - eval_results.json

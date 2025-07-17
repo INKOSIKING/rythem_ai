@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  api:
+    build: ../rhythm-ai-api
+    ports:
+      - "8000:8000"
+    env_file:
+      - ../.env
+  web:
+    build: ../rhythm-ai-web
+    ports:
+      - "3000:3000"
+  studio:
+    build: ../rhythm-ai-studio
+    ports:
+      - "4000:4000"

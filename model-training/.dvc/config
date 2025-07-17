@@ -1,0 +1,3 @@
+['remote "myremote"']
+    url = s3://rhythm-ai-dvc
+    region = us-east-1

@@ -1,0 +1,9 @@
+{
+  "name": "music-ai-mobile",
+  "version": "0.3.0",
+  "private": true,
+  "dependencies": {
+    "react-native": "^0.73.0",
+    "music-ai-sdk": "file:../music-ai-sdk-js"
+  }
+}

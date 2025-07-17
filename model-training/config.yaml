@@ -1,0 +1,17 @@
+model:
+  type: melodygen
+  sample_rate: 32000
+  embedding_dim: 1024
+  num_layers: 24
+  num_heads: 16
+training:
+  epochs: 100
+  batch_size: 16
+  lr: 2e-5
+  checkpoint_path: models/checkpoints/
+  log_every: 10
+datasets:
+  metadata: datasets/metadata.json
+inference:
+  max_length: 512
+wandb_project: rhythm-ai

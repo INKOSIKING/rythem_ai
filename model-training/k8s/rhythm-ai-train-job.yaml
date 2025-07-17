@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rhythm-ai-train
+spec:
+  template:
+    spec:
+      containers:
+      - name: trainer
+        image: ghcr.io/yourorg/rhythm-ai-training:latest
+        command: ["python3", "train.py"]
+        resources:
+          requests:
+            nvidia.com/gpu: 1
+            cpu: "4"
+            memory: "32Gi"
+          limits:
+            nvidia.com/gpu: 1
+            cpu: "8"
+            memory: "64Gi"
+        env:
+        - name: WANDB_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rhythm-ai-secrets
+              key: wandb_api_key
+        volumeMounts:
+        - name: dataset-volume
+          mountPath: /app/datasets
+        - name: model-volume
+          mountPath: /app/models/checkpoints
+      restartPolicy: Never
+      volumes:
+      - name: dataset-volume
+        persistentVolumeClaim:
+          claimName: rhythm-ai-dataset-pvc
+      - name: model-volume
+        persistentVolumeClaim:
+          claimName: rhythm-ai-model-pvc
+  backoffLimit: 3

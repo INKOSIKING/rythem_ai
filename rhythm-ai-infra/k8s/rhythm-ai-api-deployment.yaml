@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rhythm-ai-api
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: rhythm-ai-api
+    spec:
+      containers:
+      - name: api
+        image: ghcr.io/rhythmai/rhythm-ai-api:latest
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+        env:
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: openai-api
+              key: key

@@ -1,0 +1,14 @@
+{
+  "name": "music-ai-web",
+  "version": "0.3.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "music-ai-sdk": "file:../music-ai-sdk-js"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  }
+}

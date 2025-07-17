@@ -1,0 +1,35 @@
+project_name: RythemAI
+version: 1.0.0
+
+data:
+  midi_dir: "/data/midi"
+  meta_csv: "/data/metadata.csv"
+  vocab_file: "/data/vocab.json"
+  max_seq_len: 1024
+  batch_size: 32
+  num_workers: 8
+
+model:
+  type: "transformer"
+  d_model: 512
+  nhead: 8
+  num_layers: 12
+  dim_feedforward: 2048
+  dropout: 0.1
+  max_seq_len: 1024
+
+training:
+  epochs: 100
+  learning_rate: 0.0005
+  weight_decay: 0.01
+  log_dir: "/logs"
+  checkpoint_dir: "/checkpoints"
+  validate_every: 1
+
+inference:
+  checkpoint: "/checkpoints/best_model.pt"
+  api_port: 8080
+
+logging:
+  level: "INFO"
+  file: "/logs/rythemai.log"
